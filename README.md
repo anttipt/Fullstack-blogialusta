@@ -104,11 +104,62 @@ Tämä reitti palauttaa yksittäisen artikkelin ID:n perusteella.
 
 Tämä opetti minulle, miten frontend ja backend keskustelevat keskenään selkeän API-rajapinnan kautta.
 
-## Axios-kutsut ja CORS
+## 🔹 Axios-kutsut ja CORS
 
-MongoDB:n käyttö Mongoose-kirjastolla
+Projektissa opin tekemään HTTP-pyyntöjä Reactista backendille Axios-kirjaston avulla 
+sekä ratkaisemaan CORS-ongelmat, joita syntyy kun frontend ja backend toimivat eri porteissa.
 
-CRUD-toiminnallisuus fullstack-projektissa
+### 🟦 Axios – HTTP-kutsut Reactista
+
+Axiosin avulla opin:
+- tekemään GET-, POST-, PUT- ja DELETE-pyyntöjä
+- käsittelemään vastaukset ja virheet
+- rakentamaan oman `api.js`-tiedoston, joka keskittää kaikki API-kutsut yhteen paikkaan
+- käyttämään `async/await`-syntaksia selkeämpään koodiin
+
+**Esimerkki:**
+
+```js
+export const getArticles = () => API.get('/articles');
+export const createArticle = (data) => API.post('/articles', data);
+```
+Axiosin käyttö teki koodista selkeää ja helposti ylläpidettävää, koska kaikki API-kutsut 
+ovat yhdessä tiedostossa.
+
+### 🟩 CORS – Cross-Origin Resource Sharing
+
+Koska frontend (http://localhost:3000) ja backend (http://localhost:5000) toimivat eri porteissa, selain estää pyynnöt ilman CORS-sallintaa.
+Opin:
+- miksi CORS-virhe syntyy
+- miten Expressissä sallitaan frontendin pyynnöt
+- miten cors()-middleware ratkaisee ongelman
+Esimerkki Expressissä:
+```
+const cors = require('cors');
+app.use(cors());
+```
+Tämä sallii kaikki pyynnöt frontendiltä ja poistaa selaimen eston.
+
+### 🔗 Miten nämä toimivat yhdessä?
+
+- React lähettää Axios-pyynnön backendille
+- Selain tarkistaa CORS-säännöt
+- Express hyväksyy pyynnön cors()-middlewarellä
+- Backend palauttaa JSON-datan
+- React näyttää datan käyttöliittymässä
+
+Tämä opetti minulle, miten frontend ja backend keskustelevat turvallisesti 
+ja miten CORS vaikuttaa selainpohjaisiin sovelluksiin.
+
+
+
+
+
+
+
+## 🔹 MongoDB:n käyttö Mongoose-kirjastolla
+
+## 🔹 CRUD-toiminnallisuus fullstack-projektissa
 
 
 
