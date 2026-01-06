@@ -151,13 +151,94 @@ Tämä sallii kaikki pyynnöt frontendiltä ja poistaa selaimen eston.
 Tämä opetti minulle, miten frontend ja backend keskustelevat turvallisesti 
 ja miten CORS vaikuttaa selainpohjaisiin sovelluksiin.
 
-
-
-
-
-
-
 ## 🔹 MongoDB:n käyttö Mongoose-kirjastolla
+
+Projektissa opin käyttämään MongoDB-tietokantaa Mongoose-kirjaston avulla.  
+Mongoose tarjoaa selkeän tavan määritellä tietomallit (schemat), tehdä kyselyitä ja hallita tietokannan rakennetta.
+
+### 🟩 Mongoose-scheman luominen
+
+Opin määrittelemään MongoDB-kokoelman rakenteen Mongoose-schemalla.  
+Tämä tekee datasta ennustettavaa ja helpottaa virheiden havaitsemista.
+
+**Esimerkki artikkelimallista:**
+
+```js
+const ArticleSchema = new mongoose.Schema({
+  title: String,
+  content: String,
+  author: String,
+});
+```
+Tämä schema määrittelee, millaisia kenttiä artikkeli sisältää.
+
+### 🟦 Mongoose-mallin käyttö
+
+Scheman pohjalta luodaan malli, jonka avulla voidaan tehdä tietokantakyselyitä:
+```
+const Article = mongoose.model('Article', ArticleSchema);
+```
+Opin käyttämään mallia seuraaviin operaatioihin:
+
+- uuden dokumentin luominen (Article.create)
+- dokumenttien hakeminen (Article.find)
+- yksittäisen dokumentin hakeminen ID:llä (Article.findById)
+- dokumentin päivittäminen (Article.findByIdAndUpdate)
+- dokumentin poistaminen (Article.findByIdAndDelete)
+
+### 🧪 CRUD-operaatiot Mongoosea käyttäen
+
+Projektissa toteutin kaikki keskeiset tietokantaoperaatiot:
+
+Luo:
+```
+await Article.create(req.body);
+````
+
+Lue:
+```
+const articles = await Article.find();
+```
+
+Lue yksittäinen:
+```
+const article = await Article.findById(req.params.id);
+```
+
+Päivitä:
+```
+await Article.findByIdAndUpdate(req.params.id, req.body);
+```
+
+Poista:
+```
+await Article.findByIdAndDelete(req.params.id);
+```
+
+#### 🔗 Yhteys MongoDB:hen
+
+Opin myös muodostamaan yhteyden MongoDB:hen:
+```
+mongoose.connect('mongodb://localhost:27017/blog');
+```
+Tämä yhdistää backendin paikalliseen MongoDB-instanssiin.
+
+### 🎯 Mitä opin?
+
+- Miten MongoDB:n dokumenttipohjainen rakenne toimii
+- Miten Mongoose helpottaa skeemojen ja mallien hallintaa
+- Miten CRUD-operaatiot toteutetaan backendissä
+- Miten tietokanta kytketään Express-palvelimeen
+- Miten data virtaa frontendistä backendin kautta tietokantaan ja takaisin
+
+Tämä kokonaisuus antoi hyvän ymmärryksen siitä, miten tietokanta integroituu fullstack-sovellukseen.
+
+
+
+
+
+
+
 
 ## 🔹 CRUD-toiminnallisuus fullstack-projektissa
 
