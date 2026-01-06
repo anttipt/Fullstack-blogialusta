@@ -55,13 +55,62 @@ blog/
 
 ## 📚 Oppimispisteet
 
-Reititys Reactissa ja Expressissä
+## 🔹 Reititys Reactissa ja Expressissä
 
-Axios-kutsut ja CORS
+Projektissa opin rakentamaan reitityksen sekä frontendissä (React) että backendissä (Express).  
+Nämä kaksi reitityskerrostoa toimivat yhdessä: React hallitsee käyttöliittymän sivunvaihdot, ja Express tarjoaa API-päätepisteet datan hakemiseen ja muokkaamiseen.
+
+### 🟦 React Router – käyttöliittymän reititys
+
+Reactissa käytin `react-router-dom`-kirjastoa sivujen näyttämiseen ilman sivun uudelleenlatausta.  
+Tärkeimmät opitut asiat:
+
+- Reitit määritellään `<Route>`-komponenteilla
+- URL-parametreja (kuten artikkelin ID) luetaan `useParams`-hookilla
+- Navigointi tehdään `useNavigate`-hookilla
+- Komponentit renderöidään dynaamisesti URL:n perusteella
+
+**Esimerkki:**
+
+```jsx
+<Route path="/article/:id" element={<ViewArticle />} />
+```
+Tämä reitti näyttää ViewArticle-komponentin ja välittää URL:ssä olevan :id-parametrin komponentille. 
+
+### 🟩 Express – backendin API-reititys
+
+Expressissä opin rakentamaan REST-tyylisiä reittejä, jotka käsittelevät HTTP-pyyntöjä (GET, POST, PUT, DELETE).
+Nämä reitit vastaavat Reactin tekemistä Axios-kutsuista.
+Tärkeimmät opitut asiat:
+- Reitit määritellään app.get, app.post, app.put, app.delete
+- URL-parametrit luetaan req.params
+- JSON-data luetaan req.body
+- MongoDB-kyselyt tehdään Mongoose-mallien avulla
+
+**Esimerkki:**
+```
+app.get('/articles/:id', async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  res.json(article);
+});
+```
+Tämä reitti palauttaa yksittäisen artikkelin ID:n perusteella.
+### 🔗 Miten nämä toimivat yhdessä?
+
+- React lähettää Axios-kutsun esim. osoitteeseen /articles/123
+- Express vastaanottaa pyynnön ja hakee datan MongoDB:stä
+- Express palauttaa JSON-vastauksen
+- React näyttää datan käyttöliittymässä
+
+Tämä opetti minulle, miten frontend ja backend keskustelevat keskenään selkeän API-rajapinnan kautta.
+
+## Axios-kutsut ja CORS
 
 MongoDB:n käyttö Mongoose-kirjastolla
 
 CRUD-toiminnallisuus fullstack-projektissa
+
+
 
 ## 📜 Lisenssi
 
