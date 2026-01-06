@@ -242,6 +242,91 @@ Tämä kokonaisuus antoi hyvän ymmärryksen siitä, miten tietokanta integroitu
 
 ## 🔹 CRUD-toiminnallisuus fullstack-projektissa
 
+Projektissa opin toteuttamaan täydellisen CRUD‑toiminnallisuuden (Create, Read, Update, Delete) siten, että frontend ja backend toimivat saumattomasti yhdessä. Tämä oli keskeinen osa sovelluksen arkkitehtuuria ja opetti, miten data kulkee koko järjestelmän läpi.
+
+### 🟦 Create – uuden artikkelin luominen
+
+Frontend:
+- Käyttäjä täyttää lomakkeen Reactissa
+- Axios lähettää POST‑pyynnön backendille
+
+Backend:
+- Express vastaanottaa datan `req.body`‑objektina
+- Mongoose tallentaa uuden dokumentin MongoDB:hen
+
+**Esimerkki:**
+```js
+app.post('/articles', async (req, res) => {
+  const article = await Article.create(req.body);
+  res.json(article);
+});
+```
+### 🟩 Read – artikkelien hakeminen
+
+Frontend:
+- Etusivu hakee kaikki artikkelit getArticles()‑funktiolla
+- Yksittäinen artikkeli haetaan URL‑parametrin perusteella
+
+Backend:
+- Article.find() palauttaa kaikki dokumentit
+- Article.findById() palauttaa yhden dokumentin
+
+Esimerkki:
+```
+app.get('/articles/:id', async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  res.json(article);
+});
+```
+### 🟧 Update – artikkelin muokkaaminen
+
+Frontend:
+- Muokkaussivu esitäyttää lomakkeen nykyisillä arvoilla
+- Axios lähettää PUT‑pyynnön backendille
+
+Backend:
+- findByIdAndUpdate() päivittää dokumentin ja palauttaa uuden version
+
+Esimerkki:
+```
+app.put('/articles/:id', async (req, res) => {
+  const updated = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.json(updated);
+});
+```
+### 🟥 Delete – artikkelin poistaminen
+
+Frontend:
+- Käyttäjä painaa "Poista"‑painiketta
+- Axios lähettää DELETE‑pyynnön backendille
+
+Backend:
+- findByIdAndDelete() poistaa dokumentin tietokannasta
+
+Esimerkki:
+```
+app.delete('/articles/:id', async (req, res) => {
+  await Article.findByIdAndDelete(req.params.id);
+  res.json({ message: 'Artikkeli poistettu' });
+});
+```
+### 🔗 Miten CRUD toimii fullstack‑projektissa?
+
+- React hoitaa käyttöliittymän ja lomakkeet
+- Axios välittää datan backendille
+- Express käsittelee pyynnöt ja validoi datan
+- Mongoose suorittaa tietokantaoperaatiot
+- MongoDB tallentaa ja palauttaa datan
+- React päivittää näkymän muutosten perusteella
+
+Tämä kokonaisuus opetti minulle, miten fullstack‑sovelluksen eri kerrokset keskustelevat keskenään 
+ja miten data virtaa läpi koko järjestelmän.
+
+
+
+
+
+
 
 
 ## 📜 Lisenssi
